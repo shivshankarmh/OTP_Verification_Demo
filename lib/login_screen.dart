@@ -45,9 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         showLoading = false;
       });
-
-      _scaffoldKey.currentState
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
+      // _scaffoldKey.currentState._scaffoldKey.currentState.showSnackBar();
     }
   }
 
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: InputDecoration(hintText: "phone number"),
         ),
         SizedBox(height: 16),
-        FlatButton(
+        TextButton(
           onPressed: () async {
             setState(() {
               showLoading = true;
@@ -74,8 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 //signInWithPhoneAuthCredential(phoneAuthCredential);
               },
               verificationFailed: (verificationFailed) async {
-                _scaffoldKey.currentState.showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(verificationFailed.message)));
+                // _scaffoldKey.currentState.showSnackBar(
+                //     SnackBar(content: Text(verificationFailed.message)));
               },
               codeSent: (verificationId, resendingToken) async {
                 setState(() {
@@ -88,8 +90,14 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
           child: Text('Send'),
-          color: Colors.blue,
-          textColor: Colors.white,
+          style: TextButton.styleFrom(
+            primary: Colors.blue,
+            padding: EdgeInsets.all(16.0),
+            textStyle: TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
         ),
         Spacer(),
       ],
@@ -105,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: InputDecoration(hintText: "phone number"),
         ),
         SizedBox(height: 16),
-        FlatButton(
+        TextButton(
           onPressed: () async {
             PhoneAuthCredential phoneAuthCredential =
                 PhoneAuthProvider.credential(
@@ -115,8 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
             signInWithPhoneAuthCredential(phoneAuthCredential);
           },
           child: Text('verify'),
-          color: Colors.blue,
-          textColor: Colors.white,
+          style: TextButton.styleFrom(
+            primary: Colors.blue,
+            padding: EdgeInsets.all(16.0),
+            textStyle: TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
         ),
         Spacer(),
       ],
